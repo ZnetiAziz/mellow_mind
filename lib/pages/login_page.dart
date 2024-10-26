@@ -1,4 +1,5 @@
-// login_page.dart
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/signup_page.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
@@ -27,80 +28,90 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const Spacer(),
-              const Text(
-                'Happy to see you again!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF32486A),
-                ),
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  filled: true,
-                  fillColor: Colors.transparent,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide.none,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                    'Happy to see you again!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF32486A),
+                    ),
                   ),
-                  labelStyle: TextStyle(color: Colors.black),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide.none,
-                  ),
-                  labelStyle: TextStyle(color: Colors.black),
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: const Color(0xFF9FEEAF),
-                ),
-                onPressed: () {
-                  bool success = userManager.login(
-                      emailController.text, passwordController.text);
-                  if (success) {
-                    String username =
-                        userManager.getUsernameByEmail(emailController.text);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomePage(username: username),
+                  const SizedBox(height: 30),
+                  TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      filled: true,
+                      fillColor: Color.fromRGBO(255, 255, 255, 0.6),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide.none,
                       ),
-                    );
-                  } else {
-                    print('Invalid credentials');
-                  }
-                },
-                child: const Text('Login'),
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: passwordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      filled: true,
+                      fillColor: Color.fromRGBO(255, 255, 255, 0.6),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide.none,
+                      ),
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: const Color(0xFF9FEEAF),
+                    ),
+                    onPressed: () {
+                      bool success = userManager.login(
+                          emailController.text, passwordController.text);
+                      if (success) {
+                        String username = userManager
+                            .getUsernameByEmail(emailController.text);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                WelcomePage(username: username),
+                          ),
+                        );
+                      } else {
+                        print('Invalid credentials');
+                      }
+                    },
+                    child: const Text('Login'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              SignupPage(userManager: userManager),
+                        ),
+                      );
+                    },
+                    child: const Text('Don\'t have an account? Sign up'),
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            SignupPage(userManager: userManager)),
-                  );
-                },
-                child: const Text('Don\'t have an account? Sign up'),
+              Expanded(
+                child: Container(), // This will take up the remaining space
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),

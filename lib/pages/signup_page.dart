@@ -33,7 +33,8 @@ class SignupPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.85,
                   height: MediaQuery.of(context).size.width * 0.95,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color:
+                        const Color.fromRGBO(255, 255, 255, 0.6), // 60% opacity
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -107,7 +108,7 @@ class SignupPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Welcome!',
+                  'Nice to meet you!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
