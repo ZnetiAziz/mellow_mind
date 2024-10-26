@@ -1,5 +1,7 @@
+// signup_page.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/auth_service.dart';
+
+import 'package:flutter_application_1/services/user_manager.dart';
 
 class SignupPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -7,64 +9,117 @@ class SignupPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final UserManager userManager;
+
+  SignupPage({super.key, required this.userManager});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign Up'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(labelText: 'username'),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/im3.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: MediaQuery.of(context).size.width * 0.95,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        TextField(
+                          controller: usernameController,
+                          decoration:
+                              const InputDecoration(labelText: 'Username'),
+                        ),
+                        TextField(
+                          controller: emailController,
+                          decoration: const InputDecoration(labelText: 'Email'),
+                        ),
+                        TextField(
+                          controller: passwordController,
+                          decoration:
+                              const InputDecoration(labelText: 'Password'),
+                          obscureText: true,
+                        ),
+                        TextField(
+                          controller: confirmPasswordController,
+                          decoration: const InputDecoration(
+                              labelText: 'Confirm Password'),
+                          obscureText: true,
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.pink[300],
+                          ),
+                          onPressed: () {
+                            if (passwordController.text ==
+                                confirmPasswordController.text) {
+                              bool success = userManager.signup(
+                                  usernameController.text,
+                                  emailController.text,
+                                  passwordController.text);
+                              if (success) {
+                                print('Signup successful');
+                                Navigator.pop(context);
+                              } else {
+                                print('Error during signup');
+                              }
+                            } else {
+                              print('Passwords do not match');
+                            }
+                          },
+                          child: const Text('Sign Up'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Already have an account? Login'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Welcome!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 45, 89, 125),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            TextField(
-              controller: confirmPasswordController,
-              decoration: InputDecoration(labelText: 'Confirm Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                if (passwordController.text == confirmPasswordController.text) {
-                  bool success = await AuthService.signup(
-                      usernameController.text,
-                      emailController.text,
-                      passwordController.text);
-                  if (success) {
-                    print('Signup successful');
-                    Navigator.pop(context); // Return to the login page
-                  } else {
-                    print('Error during signup');
-                  }
-                } else {
-                  print('Passwords do not match');
-                }
-              },
-              child: Text('Sign Up'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Already have an account? Login'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
