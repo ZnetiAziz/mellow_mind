@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/signup_page.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
-import 'package:flutter_application_1/services/user_manager.dart';
+import 'package:flutter_application_1/models/user_model.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -71,11 +71,11 @@ class LoginPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   backgroundColor: const Color(0xFF9FEEAF),
                 ),
-                onPressed: () async {
-                  bool success = await userManager.login(
+                onPressed: () {
+                  bool success = userManager.login(
                       emailController.text, passwordController.text);
                   if (success) {
-                    String? username =
+                    String username =
                         userManager.getUsernameByEmail(emailController.text);
                     Navigator.pushReplacement(
                       context,

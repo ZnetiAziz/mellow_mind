@@ -1,7 +1,6 @@
 // signup_page.dart
 import 'package:flutter/material.dart';
-
-import 'package:flutter_application_1/services/user_manager.dart';
+import 'package:flutter_application_1/models/user_model.dart';
 
 class SignupPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
