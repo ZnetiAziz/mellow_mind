@@ -19,8 +19,7 @@ class ChatBotPage extends StatefulWidget {
 class _ChatBotPageState extends State<ChatBotPage> {
   final List<Map<String, String>> messages = [];
   final TextEditingController _controller = TextEditingController();
-  final String openAiApiKey =
-      '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'; // Replace with your OpenAI API key
+  final String openAiApiKey = ''; // Replace with your OpenAI API key
 
   Future<void> sendMessage(String message) async {
     if (message.isEmpty) return;
