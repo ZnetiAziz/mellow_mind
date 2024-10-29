@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
 
 class RemindersPage extends StatelessWidget {
-  const RemindersPage({super.key});
+  const RemindersPage({super.key, required String username});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class RemindersPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/im3.jpg'),
+            image: AssetImage('assets/images/imm2.jpg'),
             fit: BoxFit.cover,
           ),
         ),
