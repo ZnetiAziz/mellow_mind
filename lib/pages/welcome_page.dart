@@ -98,7 +98,9 @@ class WelcomePage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EmergencyPage(),
+                                  builder: (context) => EmergencyPage(
+                                    username: username,
+                                  ),
                                 ),
                               );
                             },

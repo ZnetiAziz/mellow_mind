@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
 
 class EmergencyPage extends StatelessWidget {
-  const EmergencyPage({super.key});
+  final String username;
+  const EmergencyPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,7 @@ class EmergencyPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const WelcomePage(
-                          username:
-                              'User'), // Replace 'User' with the actual username if needed
+                      builder: (context) => WelcomePage(username: username),
                     ),
                   );
                 },

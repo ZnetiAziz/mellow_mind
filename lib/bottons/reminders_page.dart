@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
 
 class RemindersPage extends StatelessWidget {
-  const RemindersPage({super.key, required String username});
+  final String username;
+  const RemindersPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,7 @@ class RemindersPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const WelcomePage(
-                          username:
-                              'User'), // Replace 'User' with actual username if needed
+                      builder: (context) => WelcomePage(username: username),
                     ),
                   );
                 },

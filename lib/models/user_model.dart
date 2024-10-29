@@ -3,29 +3,34 @@ class User {
   final String username;
   final String email;
   final String password;
+  final String gender; // Added gender field
+  final int age; // Added age field
+  final String civilStatus; // Added civilStatus field
 
-  User({required this.username, required this.email, required this.password});
-}
+  User({
+    required this.username,
+    required this.email,
+    required this.password,
+    required this.gender,
+    required this.age,
+    required this.civilStatus,
+  });
 
-class UserManager {
-  List<User> _users = [];
-
-  bool signup(String username, String email, String password) {
-    if (_users.any((user) => user.email == email)) {
-      return false; // User with this email already exists
-    }
-    _users.add(User(username: username, email: email, password: password));
-    return true;
+  // Converts a User to a string for storage
+  String toStorageString() {
+    return '$username,$email,$password,$gender,$age,$civilStatus';
   }
 
-  bool login(String email, String password) {
-    return _users
-        .any((user) => user.email == email && user.password == password);
-  }
-
-  String getUsernameByEmail(String email) {
-    final user = _users.firstWhere((user) => user.email == email,
-        orElse: () => throw Exception('User not found'));
-    return user.username;
+  // Creates a User from a storage string
+  factory User.fromStorageString(String storageString) {
+    final parts = storageString.split(',');
+    return User(
+      username: parts[0],
+      email: parts[1],
+      password: parts[2],
+      gender: parts[3],
+      age: int.parse(parts[4]),
+      civilStatus: parts[5],
+    );
   }
 }
