@@ -1,9 +1,10 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/signup_page.dart';
 import 'package:flutter_application_1/pages/welcome_page.dart';
+import 'package:flutter_application_1/pages/chat_page.dart'; // Import ChatPage
 import 'package:flutter_application_1/models/user_model.dart';
+
 
 class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
