@@ -1,10 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OpenAIService {
-  final String apiKey;
-
-  OpenAIService(this.apiKey);
+  final String apiKey = dotenv.env['OPENAI_API_KEY'] ?? '';
 
   Future<void> sendRequest(String prompt) async {
     final url = Uri.parse('https://api.openai.com/v1/engines/davinci-codex/completions');
@@ -27,3 +26,4 @@ class OpenAIService {
     }
   }
 }
+
