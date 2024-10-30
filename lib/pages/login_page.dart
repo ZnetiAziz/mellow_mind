@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/signup_page.dart';
-import 'package:flutter_application_1/pages/welcome_page.dart';
+import 'package:flutter_application_1/pages/welcome_page.dart'; // You can keep this if you plan to use it elsewhere
+import 'package:flutter_application_1/pages/chat_page.dart'; // Import ChatPage
 import 'package:flutter_application_1/models/user_model.dart';
 import 'package:flutter_application_1/services/user_manager.dart';
 
@@ -80,13 +80,15 @@ class LoginPage extends StatelessWidget {
                       bool success = userManager.login(
                           emailController.text, passwordController.text);
                       if (success) {
-                        String username = userManager
-                            .getUsernameByEmail(emailController.text);
+                        // Remove this line if you don't need the username
+                        // String username = userManager.getUsernameByEmail(emailController.text);
+
+                        // Navigate to ChatPage instead of WelcomePage
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                WelcomePage(username: username),
+                                const ChatPage(), // Change to ChatPage
                           ),
                         );
                       } else {

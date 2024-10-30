@@ -1,12 +1,24 @@
 import 'package:flutter_application_1/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_1/services/openai_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UserManager {
   List<User> _users = [];
   User? _currentUser;
+  late OpenAIService _openAIService;
 
   UserManager() {
     _loadUsers();
+    _initializeOpenAIService();
+  }
+
+  // Initialize OpenAIService with API key
+  void _initializeOpenAIService() {
+    final apiKey = dotenv.env[
+            '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'] ??
+        '';
+    _openAIService = OpenAIService(apiKey);
   }
 
   Future<void> _loadUsers() async {
