@@ -10,16 +10,9 @@ class UserManager {
 
   UserManager() {
     _loadUsers();
-    _initializeOpenAIService();
   }
 
   // Initialize OpenAIService with API key
-  void _initializeOpenAIService() {
-    final apiKey = dotenv.env[
-            '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'] ??
-        '';
-    _openAIService = OpenAIService(apiKey);
-  }
 
   Future<void> _loadUsers() async {
     final prefs = await SharedPreferences.getInstance();

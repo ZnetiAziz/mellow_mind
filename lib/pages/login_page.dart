@@ -83,12 +83,12 @@ class LoginPage extends StatelessWidget {
                         // Remove this line if you don't need the username
                         // String username = userManager.getUsernameByEmail(emailController.text);
 
-                        // Navigate to ChatPage instead of WelcomePage
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const ChatPage(), // Change to ChatPage
+                            builder: (context) => const ChatBotPage(
+                              username: '',
+                            ), // Change to ChatPage
                           ),
                         );
                       } else {

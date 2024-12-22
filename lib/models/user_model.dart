@@ -24,13 +24,15 @@ class User {
   // Creates a User from a storage string
   factory User.fromStorageString(String storageString) {
     final parts = storageString.split(',');
+
+    // Assign default values for missing fields
     return User(
-      username: parts[0],
-      email: parts[1],
-      password: parts[2],
-      gender: parts[3],
-      age: int.parse(parts[4]),
-      civilStatus: parts[5],
+      username: parts.length > 0 ? parts[0] : 'Unknown',
+      email: parts.length > 1 ? parts[1] : 'unknown@example.com',
+      password: parts.length > 2 ? parts[2] : '',
+      gender: parts.length > 3 ? parts[3] : 'Not Specified',
+      age: parts.length > 4 ? int.tryParse(parts[4]) ?? 0 : 0,
+      civilStatus: parts.length > 5 ? parts[5] : 'Unknown',
     );
   }
 }
